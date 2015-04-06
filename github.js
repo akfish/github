@@ -27,7 +27,7 @@
   }
   
   //prefer native XMLHttpRequest always
-  /* istanbul ignore if  */
+  /* istanbul ignore if: hard to test without using Karma or somesuch.  */
   if (typeof window !== 'undefined' && typeof window.XMLHttpRequest !== 'undefined'){
       XMLHttpRequest = window.XMLHttpRequest;
   }
@@ -81,6 +81,8 @@
       } else {
         xhr.send();
       }
+      
+      /* istanbul ignore next: Sync is never used. */
       if (sync) {
         return xhr.response;
       }
@@ -231,14 +233,6 @@
       var currentTree = {
         'branch': null,
         'sha': null
-      };
-
-
-      // Delete a repo
-      // --------
-
-      this.deleteRepo = function(cb) {
-        _request('DELETE', repoPath, options, cb);
       };
 
       // Uses the cache if branch has not been changed

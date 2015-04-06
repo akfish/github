@@ -74,16 +74,15 @@ test('Create Repo', function(t) {
     password: test_user.PASSWORD,
     auth: "basic"
   });
-  var user = github.getUser();
+  var repo = github.getRepo(test_user.USERNAME, repoTest);
 
-  t.test('user.createRepo', function(q) {
-    user.createRepo({ "name": repoTest }, function (err, res) {
+  t.test('repo.createRepo', function(q) {
+    repo.createRepo({ "name": repoTest }, function (err, res) {
       q.error(err);
       q.equals(res.name, repoTest.toString(), 'Repo created');
       q.end();
     });
   });
-  var repo = github.getRepo(test_user.USERNAME, repoTest);
 
   t.test('repo.write', function(q) {
     repo.write('master', 'TEST.md', 'THIS IS A TEST', 'Creating test', function(err) {
@@ -91,6 +90,65 @@ test('Create Repo', function(t) {
       q.end();
     });
   });
+  
+  t.test('repo.getRef', function(q) {
+    repo.getRef('heads/master', function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  t.test('repo.createRef', function(q) {
+    repo.getRef('heads/master', function(err, sha) {
+      var refSpec = {
+        ref: 'refs/heads/new-test-branch',
+        sha: sha
+      };
+      repo.createRef(refSpec, function(err) {
+        q.error(err);
+        q.end();
+      });
+    });
+  });
+  
+  t.test('repo.deleteRef', function(q) {
+    repo.deleteRef('heads/new-test-branch', function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  t.test('repo.listTags', function(q) {
+    repo.listTags(function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  
+  t.test('repo.listPulls', function(q) {
+    repo.listPulls('open', function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  t.test('repo.getPull', function(q) {
+    var repo = github.getRepo('michael', 'github');
+    repo.getPull(153, function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  t.test('repo.listPulls', function(q) {
+    repo.listPulls('open', function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  
   clearTimeout(timeout);
   t.end();
 });

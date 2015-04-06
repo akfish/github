@@ -20,6 +20,8 @@
   "scripts": {
     "test": "node node_modules/argg test/*.js && node node_modules/jshint/bin/jshint github.js test/*.js",
     "jshint": "node node_modules/jshint/bin/jshint github.js test/*.js",
+    "cover": "istanbul cover node_modules/argg test/*.js",
+    "plato": "node node_modules/plato/bin/plato -d reports/plato github.js test/*.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +38,6 @@
   ],
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "aa8aa3c8cd5ce5240373d4fd1d06a7ab4af41a36",
   "bugs": {
     "url": "https://github.com/michael/github/issues"
   },
