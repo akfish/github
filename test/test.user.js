@@ -75,6 +75,14 @@ test("User API", function(t) {
       q.end();
     });
   });
+  
+  t.test('user.issues', function(q) {
+    user.issues(function(err, data) {
+      console.dir(data);
+      q.error(err, 'issues ingalls');
+      q.end();
+    });
+  });
 
   clearTimeout(timeout);
   t.end();

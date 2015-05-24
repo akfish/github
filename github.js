@@ -218,6 +218,19 @@
       this.createRepo = function(options, cb) {
         _request('POST', '/user/repos', options, cb);
       };
+      
+      // Get user issues
+      // -------
+      this.issues = function(cb) {
+        _request('GET', '/user/issues', {
+          filter: 'subscribed',
+          state: 'all',
+          sort: 'updated',
+          direction: 'desc'
+        }, function(err, res) {
+          cb(err, res);
+        }, true);
+      };
 
     };
 
