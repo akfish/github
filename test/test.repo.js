@@ -148,6 +148,55 @@ test('Create Repo', function(t) {
     });
   });
   
+  t.test('repo.compare', function(q) {
+    repo.compare('master', 'master', function(err) { // probably needs a better test than this.
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  // TODO fix
+  // t.test('repo.getBlob', function(q) {
+  //   repo.getRef('heads/master', function(err, sha) {
+  //     repo.getBlob(sha, function(err) {
+  //       q.error(err);
+  //       q.end();
+  //     });
+  //   });
+  // });
+  
+  t.test('repo.getSha', function(q) {
+    repo.getSha('master', 'TEST.md', function(err) {
+      q.error(err);
+      q.end();
+    });
+  });
+  
+  t.test('repo.getTree', function(q) {
+    repo.getRef('heads/master', function(err, sha) {
+      repo.getTree(sha, function(err) {
+        q.error(err);
+        q.end();
+      });
+    });
+  });
+  
+  t.test('repo.postBlob', function(q) {
+    repo.postBlob('testing', function(err) {
+      q.error(err);
+      q.end();
+    });
+    
+    // TODO non-string test
+    // repo.postBlob('testing', function(err) {
+    //   q.error(err);
+    //   q.end();
+    // });
+  });
+  
+  // TODO repo.updateTree; repo.postTree; repo.commit; repo.updateHead
+  
+  
   
   clearTimeout(timeout);
   t.end();
