@@ -344,7 +344,12 @@
       // repo.deleteRef('tags/v1.0')
 
       this.deleteRef = function(ref, cb) {
-        _request('DELETE', repoPath + '/git/refs/' + ref, options, cb);
+        _request('DELETE', repoPath + '/git/refs/' + ref, options, function(err, res, xhr){
+          if (err) {
+            return cb(err);
+          }
+          return cb(null, xhr);
+        });
       };
 
       // Create a repo
