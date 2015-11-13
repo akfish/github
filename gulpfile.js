@@ -16,7 +16,7 @@ function runTests(singleRun, isCI, done) {
    var files = [
       path.join(__dirname, 'test/vendor/*.js'), // PhantomJS 1.x polyfills
       path.join(__dirname, 'github.js'),
-      path.join(__dirname, 'test/*.js')
+      path.join(__dirname, 'test/test.repo.js')
    ];
 
    if (singleRun) {
@@ -40,12 +40,14 @@ function runTests(singleRun, isCI, done) {
       singleRun: singleRun,
       autoWatch: !singleRun,
       reporters: reporters,
-      preprocessors: preprocessors
+      preprocessors: preprocessors,
+      captureTimeout: 120000
    };
 
    if (isCI) {
       localConfig.sauceLabs = {
-         testName: 'GitHub.js UAT tests'
+         testName: 'GitHub.js UAT tests',
+         idleTimeout: 10000
       };
       localConfig.customLaunchers = sauceLaunchers;
       localConfig.browsers = Object.keys(sauceLaunchers);
@@ -106,39 +108,39 @@ var sauceLaunchers = {
       browserName: 'chrome',
       version: '45'
    },
-   SL_Firefox: {
-      base: 'SauceLabs',
-      browserName: 'firefox',
-      version: '39'
-   },
-   SL_Safari: {
-      base: 'SauceLabs',
-      browserName: 'safari',
-      platform: 'OS X 10.10',
-      version: '8'
-   },
-   SL_IE_9: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      platform: 'Windows 2008',
-      version: '9'
-   },
-   SL_IE_10: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      platform: 'Windows 2012',
-      version: '10'
-   },
-   SL_IE_11: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      platform: 'Windows 8.1',
-      version: '11'
-   },
-   SL_iOS: {
-      base: 'SauceLabs',
-      browserName: 'iphone',
-      platform: 'OS X 10.10',
-      version: '8.1'
-   }
+   // SL_Firefox: {
+   //    base: 'SauceLabs',
+   //    browserName: 'firefox',
+   //    version: '39'
+   // },
+   // SL_Safari: {
+   //    base: 'SauceLabs',
+   //    browserName: 'safari',
+   //    platform: 'OS X 10.10',
+   //    version: '8'
+   // },
+   // SL_IE_9: {
+   //    base: 'SauceLabs',
+   //    browserName: 'internet explorer',
+   //    platform: 'Windows 2008',
+   //    version: '9'
+   // },
+   // SL_IE_10: {
+   //    base: 'SauceLabs',
+   //    browserName: 'internet explorer',
+   //    platform: 'Windows 2012',
+   //    version: '10'
+   // },
+   // SL_IE_11: {
+   //    base: 'SauceLabs',
+   //    browserName: 'internet explorer',
+   //    platform: 'Windows 8.1',
+   //    version: '11'
+   // },
+   // SL_iOS: {
+   //    base: 'SauceLabs',
+   //    browserName: 'iphone',
+   //    platform: 'OS X 10.10',
+   //    version: '8.1'
+   // }
 };

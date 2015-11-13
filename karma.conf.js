@@ -6,6 +6,8 @@ module.exports = function(config) {
          captureConsole: true
       },
 
+      concurrency: 2,
+
       singleRun: true,
 
       autoWatch: false,
