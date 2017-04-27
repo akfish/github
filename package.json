@@ -4,6 +4,7 @@
   "license": "BSD-3-Clause-Clear",
   "description": "A higher-level wrapper around the Github API.",
   "main": "dist/components/GitHub.js",
+  "types": "github-api.d.ts",
   "contributors": [
     "Ændrew Rininsland <aendrew.rininsland@thetimes.co.uk> (http://www.aendrew.com)",
     "Aurelio De Rosa <a.derosa@audero.it> (http://www.audero.it/)",
@@ -18,6 +19,7 @@
     "test": "mocha --opts ./mocha.opts test/*.spec.js",
     "test-coverage": "NODE_ENV=test nyc mocha --opts ./mocha.opts test/*.spec.js",
     "test-verbose": "DEBUG=github* npm test",
+    "test-typing": "tsc",
     "lint": "gulp lint",
     "make-docs": "node_modules/.bin/jsdoc -c .jsdoc.json --verbose",
     "make-ts-def": "node_modules/.bin/jsdoc -c .jsdoc-ts.json --verbose",
@@ -86,6 +88,7 @@
     "nock": "^9.0.2",
     "nyc": "9.0.1",
     "tsd-jsdoc": "^2.0.0-beta.3",
+    "typescript": "^2.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
