@@ -1,5 +1,3 @@
-/// <reference types="axios" />
-
 import { AxiosPromise } from 'axios';
 
 declare module Requestable {
